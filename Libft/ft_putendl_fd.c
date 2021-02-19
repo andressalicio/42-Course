@@ -3,15 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ande-sou <ande-sou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:35:36 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/02/16 16:35:36 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/02/17 11:41:29 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
-#include "libft.h"
 
 #include "libft.h"
 

@@ -6,78 +6,67 @@
 /*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:35:58 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/02/16 16:35:58 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:43:11 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-
 #include "libft.h"
 
-static int	count_words(const char *str, char c)
+static int		ft_count_words_split(char const *str, char c)
 {
-	int i;
-    int trigger;
+	int	counter;
+	int looking_words;
 
-    trigger = 0;
-    i = 0;
-   while (*str)
-   {
-       if (*str != c && trigger == 0)
-       {
-           trigger = 1;
-           i++;
-       }
-       else if (*str == c)
-            trigger = 0;
-       str++;
-   }
-   return (i);
-}
-
-static char	*word_dup(const char *str, int start, int finish)
-{
-	char *word;
-    int i;
-
-    i = 0;
-    word = (char *)malloc((start - finish) * sizeof(char));
-    while (start < finish)
-        word[i++] = str[start++];
-    word[i] = '\0';
-	return (word);
-}
-
-char		**ft_split(char const *s, char c)
-{
-	size_t	i;
-	size_t	j;
-	int		index;
-	char	**split;
-
-	if (!s || !(split = malloc((count_words(s, c) + 1) * sizeof(char *))))
-		return (0);
-	i = 0;
-	j = 0;
-	index = -1;
-	while (i <= ft_strlen(s))
+	counter = 0;
+	looking_words = 1;
+	while (*str)
 	{
-		if (s[i] != c && index < 0)
-			index = i;
-		else if ((s[i] == c || i == ft_strlen(s)) && index >= 0)
+		if (*str == c)
+			looking_words = 1;
+		else if (*str != c && looking_words)
 		{
-			split[j++] = word_dup(s, index, i);
-			index = -1;
+			looking_words = 0;
+			counter++;
 		}
-		i++;
+		str++;
 	}
-	split[j] = 0;
-	return (split);
+	return (counter);
 }
 
+static int		get_end_index(char const *str, char c)
+{
+	int		len;
 
-/*Allocates (with malloc(3)) and returns an array
-of strings obtained by splitting ’s’ using the
-character ’c’ as a delimiter. The array must be
-ended by a NULL pointer.
-*/
+	len = 0;
+	while (str[len] && str[len] != c)
+		len++;
+	return (len);
+}
+
+char			**ft_split(char const *s, char c)
+{
+	char	**matrix;
+	int		count_words;
+	int		w;
+	size_t	end;
+
+	if (!s)
+		return (NULL);
+	count_words = ft_count_words_split(s, c) + 1;
+	if (!(matrix = malloc(sizeof(char *) * count_words)))
+		return (NULL);
+	w = 0;
+	while (w < count_words - 1)
+	{
+		if (*s == c)
+			s++;
+		else
+		{
+			end = get_end_index(s, c);
+			matrix[w++] = ft_substr(s, 0, end);
+			s += end;
+		}
+	}
+	matrix[w] = 0;
+	return (matrix);
+}

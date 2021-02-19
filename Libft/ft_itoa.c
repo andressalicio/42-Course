@@ -6,68 +6,69 @@
 /*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/16 16:34:32 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/02/16 16:34:32 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/02/19 15:49:48 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include <stdio.h>
 #include "libft.h"
 
-int len(long nb)
+static int		nbr_digits(int n)
 {
-    int len;
+	int counter;
 
-    if (nb < 0)
-    {
-        nb = nb * -1;
-        len++;
-    }
-    while (nb > 0)
-    {
-        nb = nb / 10;
-        len++;
-    }
-    return (len);
+	counter = 0;
+	while (n > 0)
+	{
+		counter++;
+		n /= 10;
+	}
+	return (counter);
 }
 
-char *ft_itoa(int nb)
+static char		*handle_exception(int n)
 {
-    char *str;
-    long n;
-    int i;
+	char *str;
 
-    n = nb;
-    i = len(n);
-    if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
-        return (NULL);
-    str[i--] = '\0';
-    if (n == 0)
-    {
-        str[0] = 48;
-        return (str);
-    }
-    if (n < 0)
-    {
-        str[0] = '-';
-        n *= -1;
-    }
-    while (n > 0)
-    {
-        str[i] = 48 + (n % 10);
-        n = n / 10;
-        i--;
-    }
-    return (str);
+	if (n == 0)
+	{
+		if (!(str = malloc(2 * sizeof(char))))
+			return (NULL);
+		ft_strlcpy(str, "0", 2);
+	}
+	else
+	{
+		if (!(str = malloc(12 * sizeof(char))))
+			return (NULL);
+		ft_strlcpy(str, "-2147483648", 12);
+	}
+	return (str);
 }
 
-int main(void)
+char			*ft_itoa(int n)
 {
-	printf("%s\n", ft_itoa(-123156));
-	return (0);
-}
+	char	*str;
+	int		isneg;
+	int		len;
 
-/*Allocates (with malloc(3)) and returns a string
-representing the integer received as an argument.
-Negative numbers must be handled.
-*/
+	if (n == 0 || n == -2147483648)
+		return (handle_exception(n));
+	isneg = 0;
+	len = nbr_digits(n >= 0 ? n : -n) + 1;
+	if (n < 0)
+	{
+		len++;
+		isneg = 1;
+		n = -n;
+	}
+	if (!(str = malloc(len * sizeof(char))))
+		return (NULL);
+	str[--len] = '\0';
+	while (n > 0)
+	{
+		str[--len] = (n % 10) + '0';
+		n /= 10;
+	}
+	if (isneg)
+		str[0] = '-';
+	return (str);
+}
