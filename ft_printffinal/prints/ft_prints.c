@@ -6,7 +6,7 @@
 /*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:00:41 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/04/15 17:15:37 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/04/19 15:09:34 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,7 @@ int	ft_prints(char c, va_list *arg_ptr, t_flags *flags)
 			len_print_override = 6;
 		}
 	}
-
-	// printf("\n%d\n", !aux);
+	
 	len = ft_strlen(aux);
 	len_spaces = len;
 	len_spaces = ft_flagsstr(flags, len_spaces, len);
