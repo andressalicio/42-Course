@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printdi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ande-sou <ande-sou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:56:16 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/04/15 17:07:03 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/04/22 14:31:32 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ uintmax_t	ft_neg(uintmax_t nb, intmax_t	aux1)
 }
 
 int	ft_len(t_flags *flags, uintmax_t nb)
-{	
-	int len;
+{
+	int	len;
 
 	len = print_len_int(nb);
-	if (nb == 0 && flags->dot == 1)
+	if (nb == 0 && flags->dot == 1 && flags->size_of_dot >= 0)
 		len = 0;
 	else if (nb == 0)
 		len = 1;
@@ -72,7 +72,6 @@ int	ft_printdi(char c, va_list *arg_ptr_, t_flags *flags)
 	nb = 0;
 	aux1 = parse_di(arg_ptr_, flags);
 	nb = ft_neg(nb, aux1);
-	
 	if (aux1 < 0)
 		flags->neg = 1;
 	len = ft_len(flags, nb);

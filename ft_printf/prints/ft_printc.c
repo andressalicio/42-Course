@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ande-sou <ande-sou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 15:47:38 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/04/15 16:04:43 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/04/21 13:27:54 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,9 @@ int	ft_printc(char c, va_list *arg_ptr, t_flags *flags)
 {
 	intmax_t	aux1;
 	int			len;
-	//int			len_spaces;
-	int			count;	
+	int			count;
 
 	count = 0;
-	//len_spaces = 0;
 	aux1 = va_arg(*arg_ptr, int);
 	if (flags->l || flags->ll)
 		len = ft_wcharlen(aux1);

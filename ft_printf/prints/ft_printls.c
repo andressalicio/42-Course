@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printls.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ande-sou <ande-sou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/19 14:59:07 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/04/19 14:59:07 by ande-sou         ###   ########.fr       */
+/*   Created: 2021/04/21 10:17:32 by ande-sou          #+#    #+#             */
+/*   Updated: 2021/04/21 10:17:32 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,12 @@ int	ft_print_ls(const char *save, va_list *arg_ptr, t_flags *flags)
 	if (flags->dot == 1 && flags->size_of_dot < len_spaces)
 		len_spaces = flags->size_of_dot;
 	if (flags->spacesright > 0)
-		count += ft_putspaces(flags->spacesright, save[i], len_spaces, flags->neg);
+		count += ft_putspaces(flags->spacesright,
+				save[i], len_spaces, flags->neg);
 	ft_putwstr(s, flags, len_spaces);
 	if (flags->minus > 0)
-		count += ft_putspaces(flags->spacesleft, save[i], len_spaces, flags->neg);
+		count += ft_putspaces(flags->spacesleft,
+				save[i], len_spaces, flags->neg);
 	count += len_spaces;
 	return (count);
 }

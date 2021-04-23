@@ -32,10 +32,11 @@ t_flags	ft_init_flags(void)
 	flags.wprint = 4;
 	flags.hash = 0;
 	flags.neg = 0;
+	flags.spaces_printed = 0;
 	return (flags);
 }
 
-int ft_print(char c, t_flags *flags,  va_list *arg_ptr, int count)
+int	ft_print(char c, t_flags *flags, va_list *arg_ptr, int count)
 {
 	if (c == 's' && !flags->l)
 		count += ft_prints(c, arg_ptr, flags);
@@ -50,8 +51,10 @@ int ft_print(char c, t_flags *flags,  va_list *arg_ptr, int count)
 	else if (c == 'x' || c == 'X')
 		count += ft_printx(c, arg_ptr, flags);
 	else if (c == 'n')
-		ft_printn(arg_ptr, flags, count);
-	else
+		count += ft_printn(arg_ptr, flags, count);
+	else if (c == '%')
+		count += ft_printporc(c, flags);
+	else if ((c == 's' && !(flags->l > 0)) || c != 's')
 		count += ft_putchar(c);
 	return (count);
 }
@@ -63,7 +66,7 @@ int	ft_put_args(const char *save, va_list *arg_ptr)
 	t_flags	flags;
 
 	i = 0;
-	count = 0;	
+	count = 0;
 	while (1)
 	{
 		flags = ft_init_flags();
@@ -72,9 +75,10 @@ int	ft_put_args(const char *save, va_list *arg_ptr)
 		else if (save[i] == '%' && save[i + 1])
 		{
 			i = ft_flags(save, ++i, &flags, arg_ptr);
-			count = ft_print(save[i], &flags, arg_ptr, count);			
+			count = ft_print(save[i], &flags, arg_ptr, count);
+			count += flags.spaces_printed;
 			if (save[i] == 's' && flags.l > 0)
-				count += ft_print_ls(save, arg_ptr, &flags);			
+				count += ft_print_ls(save, arg_ptr, &flags);
 		}
 		else
 			count += ft_putchar(save[i]);
@@ -97,3 +101,4 @@ int	ft_printf(const char *input, ...)
 	free((char *)save);
 	return (count);
 }
+

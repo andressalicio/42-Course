@@ -14,7 +14,8 @@
 
 int	ft_flagslx(t_flags *flags, int len)
 {
-	int len_spaces;
+	int	len_spaces;
+
 	len_spaces = len;
 	if (flags->zero == 1 && flags->size_of_zero > len_spaces)
 		len_spaces = flags->size_of_zero;

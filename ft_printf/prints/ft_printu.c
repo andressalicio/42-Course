@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printu.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ande-sou <ande-sou@student.42lisboa.com    +#+  +:+       +#+        */
+/*   By: ande-sou <ande-sou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/12 16:04:25 by ande-sou          #+#    #+#             */
-/*   Updated: 2021/04/15 16:02:42 by ande-sou         ###   ########.fr       */
+/*   Updated: 2021/04/21 11:57:09 by ande-sou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ static int	print_len(uintmax_t n)
 
 int	ft_flagsl(t_flags *flags, int len)
 {
-	int len_spaces;
-	
+	int	len_spaces;
+
 	len_spaces = len;
 	if (flags->zero == 1 && flags->size_of_zero > len)
 		len_spaces = flags->size_of_zero;
@@ -77,14 +77,14 @@ int	ft_printu(char c, va_list *arg_ptr_, t_flags *flags)
 	len_spaces = 0;
 	aux3 = parse_u(arg_ptr_, flags);
 	len = print_len(aux3);
-	if (aux3 == 0 && flags->dot == 1)
+	if (aux3 == 0 && flags->dot == 1 && flags->size_of_dot >= 0)
 		len = 0;
 	else if (aux3 == 0)
 		len = 1;
 	len_spaces = ft_flagsl(flags, len);
 	count += ft_flagsu(c, flags, len);
 	if (len)
-		ft_putnbr(aux3);
+		ft_putnbrui(aux3);
 	if (flags->minus > 0)
 		count += ft_putspaces(flags->spacesleft, c, len_spaces, flags->neg);
 	count += len;

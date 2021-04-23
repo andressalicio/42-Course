@@ -29,7 +29,7 @@ static int	print_space_num(int spaces, int len, int neg)
 		spaces_num = 0;
 	else
 		spaces_num = spaces - len;
-	if (neg == 1)
+	if (neg == 1 && spaces_num > 0)
 		spaces_num--;
 	return (spaces_num);
 }

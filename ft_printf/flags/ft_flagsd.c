@@ -20,24 +20,24 @@ void	ft_flagsneg(intmax_t aux1, t_flags *flags)
 		flags->size_of_zero--;
 }
 
-int ft_flagsspaces(t_flags *flags, char c, int len_spaces, int count)
+int	ft_flagsspaces(t_flags *flags, char c, int len_spaces, int count)
 {
 	if (flags->spacesright > 0)
 	{
-	count += ft_putspaces(flags->spacesright, c, len_spaces, flags->neg);
-	if (flags->spacesright <= flags->size_of_dot && flags->neg == 1)
-		count++;
+		count += ft_putspaces(flags->spacesright, c, len_spaces, flags->neg);
+		// if (flags->spacesright <= flags->size_of_dot && flags->neg == 1)
+		// 	count++;
 	}
-	if ((flags->spacesleft <= flags->size_of_dot) 
-	&& flags->dot == 1 && flags->minus == 1 && flags->neg == 1)
-		count++;
+	// if ((flags->spacesleft <= flags->size_of_dot)
+	// 	&& flags->dot == 1 && flags->minus == 1 && flags->neg == 1)
+	// 	count++;
 	return (count);
 }
 
 int	ft_flagsld(t_flags *flags, int len)
 {
-	int len_spaces;
-	
+	int	len_spaces;
+
 	len_spaces = len;
 	if (flags->zero == 1 && flags->size_of_zero > len)
 		len_spaces = flags->size_of_zero;
@@ -53,10 +53,13 @@ int	ft_flagsd(char c, t_flags *flags, int len, intmax_t aux1)
 
 	count = 0;
 	len_spaces = ft_flagsld(flags, len);
-	count += ft_flagsspaces(flags, c, len_spaces, count);	
+	count += ft_flagsspaces(flags, c, len_spaces, count);
 	if (flags->neg == 1)
 	{
 		ft_flagsneg(aux1, flags);
+		// if (flags->zero != 1 && flags->dot != 1 && flags->spacesright > 0)
+		// 	count++;
+
 		count++;
 	}
 	if (flags->dot == 1)
